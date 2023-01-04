@@ -1,2 +1,4 @@
 # epam_final
-Final project
+# created by Volodymyr Korobtsov
+
+Final EPAM project
