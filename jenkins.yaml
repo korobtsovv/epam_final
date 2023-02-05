@@ -1,0 +1,18 @@
+- name: Install Jenkins on AWS EC2
+  hosts:
+    - jenkins-1
+  become: true
+
+  roles:
+    - korobtsov.init.server
+    - geerlingguy.jenkins
+    # - korobtsov.jenkins
+
+  vars:
+    jenkins_hostname: "{{ ansible_host }}"
+    jenkins_admin_username: admin
+    jenkins_admin_password: admin
+    jenkins_plugins:
+      - ec2
+      - git
+      - github
