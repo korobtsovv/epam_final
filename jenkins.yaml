@@ -1,7 +1,8 @@
 - name: Install Jenkins on AWS EC2
   hosts:
-    - jenkins-master
-    - jenkins-slave
+    # - jenkins-master
+    # - jenkins-slave
+    - MegaWebServerDocker
   become: true
 
   roles:
@@ -27,3 +28,4 @@
       - chucknorris
       - workflow-aggregator
       - publish-over-ssh
+      - docker-workflow

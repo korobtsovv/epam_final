@@ -1,8 +1,8 @@
 ---
-# - name: Upgrade all packages
-#   ansible.builtin.yum:
-#     name: '*'
-#     state: latest
+- name: Upgrade all packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
 
 - name: Ensure Docker is installed.
   shell: yum list installed | grep -c docker
