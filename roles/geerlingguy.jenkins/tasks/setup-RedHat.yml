@@ -7,8 +7,8 @@
       - "{{ 'libselinux-python' if ansible_python['version']['major'] < 3 else 'python3-libselinux' }}"
     state: present
 
-- name: Install Java
-  shell: amazon-linux-extras install java-openjdk11 -y
+# - name: Install Java
+#   shell: amazon-linux-extras install java-openjdk11 -y
 
 - name: Ensure Jenkins repo is installed.
   get_url:
