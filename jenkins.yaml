@@ -1,6 +1,6 @@
 - name: Install Jenkins on AWS EC2
   hosts:
-    - jenkins-1
+    - jenkins-master
   become: true
 
   roles:
@@ -21,3 +21,7 @@
       - ec2
       - git
       - github
+      - awseb-deployment-plugin
+      - chucknorris
+      - workflow-aggregator
+      - publish-over-ssh
