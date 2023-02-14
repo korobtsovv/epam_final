@@ -1,0 +1,47 @@
+---
+# - name: Upgrade all packages
+#   ansible.builtin.yum:
+#     name: '*'
+#     state: latest
+
+- name: Ensure Docker is installed.
+  shell: yum list installed | grep -c docker
+  register: docker
+  ignore_errors: true
+
+- name: Install Docker
+  shell: amazon-linux-extras install docker -y
+  when: docker.stdout == "0"
+
+- name: Start Docker
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Ensure group "docker" exists with correct gid
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add user ec2-user to group docker
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items:
+    - ec2-user
+    - jenkins
+
+# - name: Install docker-compose
+#   shell: >
+#         curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)
+#         -o /usr/local/bin/docker-compose
+
+# - name: Chmod docker-compose
+#   ansible.builtin.file:
+#     path: /usr/local/bin/docker-compose
+#     mode: '0755'
+
+# - name: Ensure docker-compose is installed.
+#   shell: docker compose version
