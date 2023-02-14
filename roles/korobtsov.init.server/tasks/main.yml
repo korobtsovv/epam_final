@@ -3,3 +3,18 @@
   ansible.builtin.yum:
     name: '*'
     state: latest
+
+- name: Ensure java-openjdk11 is installed
+  shell: yum list installed | grep -c java-openjdk11
+  register: java
+  ignore_errors: true
+
+- name: Install Java
+  shell: amazon-linux-extras install java-openjdk11 -y
+  when: java.stdout == "0"
+
+- name: Install requirements
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ requirements }}"

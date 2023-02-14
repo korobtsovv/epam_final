@@ -6,6 +6,7 @@
   roles:
     - korobtsov.init.server
     - geerlingguy.jenkins
+    - korobtsov.ec2.docker
 
   vars:
     jenkins_hostname: "{{ ansible_host }}"
