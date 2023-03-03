@@ -1,13 +1,13 @@
 - name: Install Jenkins on AWS EC2
   hosts:
-    # - jenkins-master
+    - jenkins-master
     # - jenkins-slave
-    - MegaWebServerDocker
+    # - MegaWebServerDocker
   become: true
 
   roles:
-    # - korobtsov.init.server
-    # - geerlingguy.jenkins
+    - korobtsov.init.server
+    - geerlingguy.jenkins
     - korobtsov.ec2.docker
 
   vars:
